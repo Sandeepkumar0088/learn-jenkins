@@ -3,13 +3,26 @@ pipeline {
     agent any
 
     stages {
-        stage('Print') {
+        stage('CheckOut') {
             steps {
                 git 'https://github.com/sdevops5427/roboshop-cart-v1.git'
-                sh aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 012751250483.dkr.ecr.us-east-1.amazonaws.com
-                sh docker build -t 012751250483.dkr.ecr.us-east-1.amazonaws.com/cart .
-                sh docker push 012751250483.dkr.ecr.us-east-1.amazonaws.com/cart
             }
+        }
+        stage('ECR Login') {
+            steps {
+                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 012751250483.dkr.ecr.us-east-1.amazonaws.com"
+            }
+        }
+        stage('Build Image') {
+            steps {
+                sh "docker build -t 012751250483.dkr.ecr.us-east-1.amazonaws.com/cart ."
+            }
+        }
+        stage('Push Image') {
+            steps {
+                sh "docker push 012751250483.dkr.ecr.us-east-1.amazonaws.com/cart"
+            }
+        }
         }
     }
 }
