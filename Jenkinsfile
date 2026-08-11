@@ -1,8 +1,8 @@
 pipeline {
     agent any
     stages {
-        stage('print') {
-            step {
+        stage('Print') {
+            steps {
                 echo 'hello world!'
             }
         }
