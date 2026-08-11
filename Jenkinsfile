@@ -23,6 +23,5 @@ pipeline {
                 sh "docker push 012751250483.dkr.ecr.us-east-1.amazonaws.com/cart"
             }
         }
-        }
     }
 }
