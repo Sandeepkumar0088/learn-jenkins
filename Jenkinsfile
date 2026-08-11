@@ -5,7 +5,8 @@ pipeline {
     stages {
         stage('CheckOut') {
             steps {
-                git 'https://github.com/sdevops5427/roboshop-cart-v1.git'
+                git branch: 'main',
+                    url: 'https://github.com/sdevops5427/roboshop-cart-v1.git'
             }
         }
         stage('ECR Login') {
